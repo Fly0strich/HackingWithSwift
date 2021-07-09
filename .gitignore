@@ -36,20 +36,21 @@ xcuserdata/
 /*.gcno
 
 ### Swift ###
-## Obj-C/Swift specific
+
+# Obj-C/Swift specific
 *.hmap
 
-## App packaging
+# App packaging
 *.ipa
 *.dSYM.zip
 *.dSYM
 
-## Playgrounds
+# Playgrounds
 timeline.xctimeline
 playground.xcworkspace
 
 # Swift Package Manager
-#
+
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
 # Package.pins
@@ -63,20 +64,18 @@ playground.xcworkspace
 .build/
 
 # CocoaPods
-#
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# Pods/
-#
+
+Pods/
+
 # Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
+*.xcworkspace
 
 # Carthage
-#
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
+Carthage/Checkouts
 
 Carthage/Build/
 
@@ -85,7 +84,6 @@ Dependencies/
 .accio/
 
 # fastlane
-#
 # It is recommended to not store the screenshots in the git repo.
 # Instead, use fastlane to re-generate the screenshots whenever they are needed.
 # For more information about the recommended setup visit:
@@ -97,8 +95,8 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 # Code Injection
-#
 # After new code Injection tools there's a generated folder /iOSInjectionProject
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
