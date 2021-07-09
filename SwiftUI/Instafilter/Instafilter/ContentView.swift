@@ -12,9 +12,12 @@ import CoreImage.CIFilterBuiltins
 struct ContentView: View {
     @State private var image: Image?
     @State private var inputImage: UIImage?
+    @State private var processedImage: UIImage?
+    @State private var currentFilter: CIFilter = .sepiaTone()
     @State private var filterIntensity: CGFloat = 0.5
     @State private var showingImagePicker = false
-    @State private var currentFilter = CIFilter.sepiaTone()
+    @State private var showingFilterSheet = false
+    
     let context = CIContext()
     
     var body: some View {
@@ -33,6 +36,7 @@ struct ContentView: View {
                 ZStack {
                     Rectangle()
                         .fill(Color.secondary)
+                    
                     if image != nil {
                         image?
                             .resizable()
@@ -55,13 +59,25 @@ struct ContentView: View {
                 
                 HStack {
                     Button("Change Filter") {
-                        
+                        self.showingFilterSheet = true
                     }
                     
                     Spacer()
                     
                     Button("Save") {
+                        guard processedImage != nil else { return }
                         
+                        let imageSaver = ImageSaver()
+                        
+                        imageSaver.successHandler = {
+                            print("Success!")
+                        }
+                        
+                        imageSaver.errorHandler = {
+                            print("Oops: \($0)")
+                        }
+                        
+                        imageSaver.writeToPhotoAlbum(image: processedImage!)
                     }
                 }
                 .padding([.horizontal, .bottom])
@@ -69,24 +85,45 @@ struct ContentView: View {
                 .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                     ImagePicker(image: $inputImage)
                 }
+                .actionSheet(isPresented: $showingFilterSheet) {
+                    ActionSheet(title: Text("Select a filter"), buttons: [
+                        .default(Text("Crystallize")) { self.setFilter(CIFilter.crystallize()) },
+                        .default(Text("Edges")) { self.setFilter(CIFilter.edges()) },
+                        .default(Text("Gaussian Blur")) { self.setFilter(CIFilter.gaussianBlur()) },
+                        .default(Text("Pixellate")) { self.setFilter(CIFilter.pixellate()) },
+                        .default(Text("Sepia Tone")) { self.setFilter(CIFilter.sepiaTone()) },
+                        .default(Text("Unsharp Mask")) { self.setFilter(CIFilter.unsharpMask()) },
+                        .default(Text("Vignette")) { self.setFilter(CIFilter.vignette()) },
+                        .cancel()
+                    ])
+                }
             }
         }
     }
     
     func loadImage() {
-        guard let inputImage = inputImage else { return }
-        let beginImage = CIImage(image: inputImage)
+        guard inputImage != nil else { return }
+        let beginImage = CIImage(image: inputImage!)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         applyProcessing()
     }
     
+    func setFilter(_ filter: CIFilter) {
+        currentFilter = filter
+        loadImage()
+    }
+    
     func applyProcessing() {
-        currentFilter.intensity = Float(filterIntensity)
+        let inputKeys = currentFilter.inputKeys
+        if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey) }
+        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey) }
+        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey) }
+        
         guard let outputImage = currentFilter.outputImage else { return }
         
         if let cgImg = context.createCGImage(outputImage, from: outputImage.extent) {
-            let uiImg = UIImage(cgImage: cgImg)
-            image = Image(uiImage: uiImg)
+            processedImage = UIImage(cgImage: cgImg)
+            image = Image(uiImage: processedImage!)
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F04C1F722698AF1C00F8AB7F /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C1F712698AF1C00F8AB7F /* ImageSaver.swift */; };
 		F0C8B896267D47C700663885 /* InstafilterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C8B895267D47C700663885 /* InstafilterApp.swift */; };
 		F0C8B898267D47C700663885 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C8B897267D47C700663885 /* ContentView.swift */; };
 		F0C8B89A267D47C800663885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0C8B899267D47C800663885 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F04C1F712698AF1C00F8AB7F /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		F0C8B892267D47C700663885 /* Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instafilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0C8B895267D47C700663885 /* InstafilterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstafilterApp.swift; sourceTree = "<group>"; };
 		F0C8B897267D47C700663885 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				F0C8B895267D47C700663885 /* InstafilterApp.swift */,
 				F0C8B897267D47C700663885 /* ContentView.swift */,
+				F04C1F712698AF1C00F8AB7F /* ImageSaver.swift */,
 				F0D24B242696A2520078ABC5 /* ImagePicker.swift */,
 				F0C8B899267D47C800663885 /* Assets.xcassets */,
 				F0C8B89E267D47C800663885 /* Info.plist */,
@@ -144,6 +147,7 @@
 				F0D24B252696A2520078ABC5 /* ImagePicker.swift in Sources */,
 				F0C8B898267D47C700663885 /* ContentView.swift in Sources */,
 				F0C8B896267D47C700663885 /* InstafilterApp.swift in Sources */,
+				F04C1F722698AF1C00F8AB7F /* ImageSaver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
