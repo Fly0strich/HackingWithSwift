@@ -14,19 +14,44 @@ struct ContentView: View {
     @State private var inputImage: UIImage?
     @State private var processedImage: UIImage?
     @State private var currentFilter: CIFilter = .sepiaTone()
-    @State private var filterIntensity: CGFloat = 0.5
+    @State private var filterIntensity: Double = 0.5
+    @State private var filterRadius: Double = 0.5
+    @State private var filterScale: Double = 0.5
     @State private var showingImagePicker = false
     @State private var showingFilterSheet = false
+    @State private var showingAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
     
     let context = CIContext()
     
     var body: some View {
-        let intensity = Binding<CGFloat> (
+        let intensity = Binding<Double> (
             get: {
                 filterIntensity
             },
             set: {
                 filterIntensity = $0
+                applyProcessing()
+            }
+        )
+        
+        let radius = Binding<Double> (
+            get: {
+                filterRadius
+            },
+            set: {
+                filterRadius = $0
+                applyProcessing()
+            }
+        )
+        
+        let scale = Binding<Double> (
+            get: {
+                filterScale
+            },
+            set: {
+                filterScale = $0
                 applyProcessing()
             }
         )
@@ -42,7 +67,7 @@ struct ContentView: View {
                             .resizable()
                             .scaledToFit()
                     } else {
-                        Text("Tap to select a picture")
+                        Text("Tap to select a photo")
                             .foregroundColor(.white)
                             .font(.headline)
                     }
@@ -55,28 +80,48 @@ struct ContentView: View {
                     Text("Intensity")
                     Slider(value: intensity)
                 }
-                .padding()
+                .padding([.horizontal, .top])
                 
                 HStack {
-                    Button("Change Filter") {
-                        self.showingFilterSheet = true
+                    Text("Radius")
+                    Slider(value: radius)
+                }
+                .padding(.horizontal)
+                
+                HStack {
+                    Text("Scale")
+                    Slider(value: scale)
+                }
+                .padding([.horizontal, .bottom])
+                
+                HStack {
+                    Button(currentFilter.name.dropFirst(2)) {
+                        showingFilterSheet = true
                     }
                     
                     Spacer()
                     
                     Button("Save") {
-                        guard processedImage != nil else { return }
+                        guard processedImage != nil else {
+                            alertTitle = "Oops!"
+                            alertMessage = "No photo selected"
+                            showingAlert = true
+                            return
+                        }
                         
                         let imageSaver = ImageSaver()
                         
                         imageSaver.successHandler = {
-                            print("Success!")
+                            alertTitle = "Success!"
+                            alertMessage = "Your photo has been saved"
                         }
                         
                         imageSaver.errorHandler = {
-                            print("Oops: \($0)")
+                            alertTitle = "Oops"
+                            alertMessage = "\($0)"
                         }
                         
+                        showingAlert = true
                         imageSaver.writeToPhotoAlbum(image: processedImage!)
                     }
                 }
@@ -97,6 +142,9 @@ struct ContentView: View {
                         .cancel()
                     ])
                 }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Ok")))
+                }
             }
         }
     }
@@ -116,8 +164,8 @@ struct ContentView: View {
     func applyProcessing() {
         let inputKeys = currentFilter.inputKeys
         if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey) }
-        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey) }
-        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey) }
+        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterRadius * 200, forKey: kCIInputRadiusKey) }
+        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterScale * 10, forKey: kCIInputScaleKey) }
         
         guard let outputImage = currentFilter.outputImage else { return }
         
