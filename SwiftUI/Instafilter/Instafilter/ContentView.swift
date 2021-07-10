@@ -118,7 +118,7 @@ struct ContentView: View {
                         
                         imageSaver.errorHandler = {
                             alertTitle = "Oops"
-                            alertMessage = "\($0)"
+                            alertMessage = "\($0.localizedDescription)"
                         }
                         
                         showingAlert = true
