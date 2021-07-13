@@ -47,7 +47,7 @@ struct BucketListView: View {
                             .padding(.trailing)
                     }
                 }
-                padding(.bottom)
+                .padding(.bottom)
             }
         }
         .alert(isPresented: $showingPlaceDetails) {
