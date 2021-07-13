@@ -51,10 +51,13 @@ struct ContentView: View {
             userDecoder.dateDecodingStrategy = .iso8601
             userDecoder.userInfo[CodingUserInfoKey.managedObjectContext] = viewContext
             
-            do {
-                let _ = try userDecoder.decode([User].self, from: userData)
-            } catch {
-                print("Decoding Failed: \(error)")
+            guard let decodedData = try? userDecoder.decode([User].self, from: userData) else {
+                print("Decoding Failed: \(error?.localizedDescription ?? "Unknown Error")")
+                return
+            }
+            
+            if !decodedData.isEmpty && viewContext.hasChanges {
+                try? viewContext.save()
             }
             
         }.resume()
