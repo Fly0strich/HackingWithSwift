@@ -24,6 +24,36 @@ struct ContentView: View {
         return total
     }
     
+    var body: some View {
+        NavigationView {
+            VStack {
+                TextField("Enter a word", text: $newWord, onCommit:addNewWord)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .autocapitalization(.none)
+                
+                List(usedWords, id: \.self) { word in
+                    HStack {
+                        Image(systemName: "\(word.count).circle")
+                        Text(word)
+                    }
+                    .accessibilityElement(children: .ignore)
+                    .accessibility(label: Text("\(word), \(word.count) points"))
+                }
+                
+                Text("Score: \(score)")
+            }
+            .navigationBarTitle(rootWord)
+            .navigationBarItems(leading: Button(action: startGame){
+                Text("New Game")
+            })
+            .onAppear(perform:startGame)
+            .alert(isPresented: $showingError) {
+                Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("Ok")))
+            }
+        }
+    }
+    
     func startGame() {
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let startWords = try? String(contentsOf: startWordsURL) {
@@ -101,31 +131,6 @@ struct ContentView: View {
         errorTitle = title
         errorMessage = message
         showingError = true
-    }
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                TextField("Enter a word", text: $newWord, onCommit:addNewWord)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .autocapitalization(.none)
-                
-                List(usedWords, id: \.self){
-                    Image(systemName: "\($0.count).circle")
-                    Text($0)
-                }
-                Text("Score: \(score)")
-            }
-            .navigationBarTitle(rootWord)
-            .navigationBarItems(leading: Button(action: startGame){
-                Text("New Game")
-            })
-            .onAppear(perform:startGame)
-            .alert(isPresented: $showingError) {
-                Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("Ok")))
-            }
-        }
     }
 }
 
