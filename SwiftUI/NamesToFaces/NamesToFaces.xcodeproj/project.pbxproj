@@ -18,6 +18,9 @@
 		F0AFF2A526AD62B7009CB7F0 /* NamedFacesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AFF2A426AD62B7009CB7F0 /* NamedFacesListView.swift */; };
 		F0AFF2A726AD62CB009CB7F0 /* AddNamedFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AFF2A626AD62CB009CB7F0 /* AddNamedFaceView.swift */; };
 		F0D59E3C26A4E531005B93A4 /* NamedFaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D59E3B26A4E531005B93A4 /* NamedFaceDetailView.swift */; };
+		F0FEF77326AE509900EBF574 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FEF77226AE509900EBF574 /* MapView.swift */; };
+		F0FEF77526AE544C00EBF574 /* MKPointAnnotation-Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FEF77426AE544C00EBF574 /* MKPointAnnotation-Codable.swift */; };
+		F0FEF77726AE56C000EBF574 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FEF77626AE56C000EBF574 /* LocationFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		F0AFF2A426AD62B7009CB7F0 /* NamedFacesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedFacesListView.swift; sourceTree = "<group>"; };
 		F0AFF2A626AD62CB009CB7F0 /* AddNamedFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNamedFaceView.swift; sourceTree = "<group>"; };
 		F0D59E3B26A4E531005B93A4 /* NamedFaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedFaceDetailView.swift; sourceTree = "<group>"; };
+		F0FEF77226AE509900EBF574 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		F0FEF77426AE544C00EBF574 /* MKPointAnnotation-Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-Codable.swift"; sourceTree = "<group>"; };
+		F0FEF77626AE56C000EBF574 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +77,13 @@
 				F0AFF2A626AD62CB009CB7F0 /* AddNamedFaceView.swift */,
 				F0AFF2A426AD62B7009CB7F0 /* NamedFacesListView.swift */,
 				F0D59E3B26A4E531005B93A4 /* NamedFaceDetailView.swift */,
+				F0FEF77226AE509900EBF574 /* MapView.swift */,
+				F0463BB526A0D56A00333407 /* ImagePicker.swift */,
 				F004508026ABAC4C00369D63 /* NamedFaces.swift */,
 				F0463BB726A0DA8F00333407 /* NamedFace.swift */,
-				F0463BB526A0D56A00333407 /* ImagePicker.swift */,
+				F0FEF77626AE56C000EBF574 /* LocationFetcher.swift */,
 				F0A77E0C26ACC5210009153B /* FileManager-Codable.swift */,
+				F0FEF77426AE544C00EBF574 /* MKPointAnnotation-Codable.swift */,
 				F0463BAA26A0D22100333407 /* Assets.xcassets */,
 				F0463BAF26A0D22100333407 /* Info.plist */,
 				F0463BAC26A0D22100333407 /* Preview Content */,
@@ -161,11 +170,14 @@
 			files = (
 				F004508126ABAC4C00369D63 /* NamedFaces.swift in Sources */,
 				F0AFF2A526AD62B7009CB7F0 /* NamedFacesListView.swift in Sources */,
+				F0FEF77726AE56C000EBF574 /* LocationFetcher.swift in Sources */,
+				F0FEF77526AE544C00EBF574 /* MKPointAnnotation-Codable.swift in Sources */,
 				F0D59E3C26A4E531005B93A4 /* NamedFaceDetailView.swift in Sources */,
 				F0AFF2A726AD62CB009CB7F0 /* AddNamedFaceView.swift in Sources */,
 				F0463BB626A0D56A00333407 /* ImagePicker.swift in Sources */,
 				F0463BA926A0D21E00333407 /* ContentView.swift in Sources */,
 				F0A77E0D26ACC5210009153B /* FileManager-Codable.swift in Sources */,
+				F0FEF77326AE509900EBF574 /* MapView.swift in Sources */,
 				F0463BB826A0DA8F00333407 /* NamedFace.swift in Sources */,
 				F0463BA726A0D21E00333407 /* NamesToFacesApp.swift in Sources */,
 			);

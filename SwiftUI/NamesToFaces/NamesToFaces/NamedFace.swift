@@ -9,17 +9,19 @@ import SwiftUI
 
 struct NamedFace: Identifiable, Codable, Comparable {
     enum CodingKeys: CodingKey {
-        case id, face, name
+        case id, face, name, locationMet
     }
     
     let id: UUID
     var face: UIImage?
     var name: String
+    var locationMet: CodableMKPointAnnotation
     
-    init(id: UUID, face: UIImage?, name: String) {
+    init(id: UUID, face: UIImage?, name: String, locationMet: CodableMKPointAnnotation) {
         self.id = id
         self.face = face
         self.name = name
+        self.locationMet = locationMet
     }
         
     init(from decoder: Decoder) throws {
@@ -28,6 +30,7 @@ struct NamedFace: Identifiable, Codable, Comparable {
         let jpegData = try container.decode(Data.self, forKey: .face)
         self.face = UIImage(data: jpegData, scale: 1.0)
         self.name = try container.decode(String.self, forKey: .name)
+        self.locationMet = try container.decode(CodableMKPointAnnotation.self, forKey: .locationMet)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -35,6 +38,7 @@ struct NamedFace: Identifiable, Codable, Comparable {
         try container.encode(id, forKey: .id)
         try container.encode(face?.jpegData(compressionQuality: 0.8), forKey: .face)
         try container.encode(name, forKey: .name)
+        try container.encode(locationMet, forKey: .locationMet)
     }
     
     static func <(lhs: Self, rhs: Self) -> Bool {

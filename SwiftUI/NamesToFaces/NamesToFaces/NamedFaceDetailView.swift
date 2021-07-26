@@ -18,14 +18,13 @@ struct NamedFaceDetailView: View {
             Image(uiImage: namedFace.face!)
                 .resizable()
                 .scaledToFit()
+                .padding(.bottom)
             
-            Spacer()
+            Text("You first met at this location")
+                .font(.caption)
+            
+            MapView(locationMet: namedFace.locationMet)
+                .frame(width: 200, height: 200)
         }
-    }
-}
-
-struct NamedFaceDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NamedFaceDetailView(namedFace: NamedFace(id: UUID(), face: nil, name: "No Name"))
     }
 }
