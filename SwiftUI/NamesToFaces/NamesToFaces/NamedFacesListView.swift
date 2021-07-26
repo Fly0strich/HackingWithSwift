@@ -15,7 +15,7 @@ struct NamedFacesListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(namedFaces.collection.sorted()) { namedFace in
+                ForEach(namedFaces.collection) { namedFace in
                     NavigationLink(destination: NamedFaceDetailView(namedFace: namedFace)) {
                         HStack {
                             Image(uiImage: namedFace.face!)

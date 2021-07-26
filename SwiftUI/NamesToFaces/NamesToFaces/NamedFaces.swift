@@ -11,7 +11,7 @@ class NamedFaces: ObservableObject {
     @Published var collection = [NamedFace]() {
         didSet {
             do {
-                try FileManager.encode(collection, to: "NamedFaces.json")
+                try FileManager.encode(collection, toFile: "NamedFaces.json")
             } catch FileManager.CodableError.encodingError(let description) {
                 print(description)
             } catch {
@@ -22,7 +22,7 @@ class NamedFaces: ObservableObject {
         
     init() {
         do {
-            self.collection = try FileManager.decode(from: "NamedFaces.json")
+            self.collection = try FileManager.decode(fromFile: "NamedFaces.json")
         } catch FileManager.CodableError.decodingError(let description) {
             print(description)
             self.collection = []

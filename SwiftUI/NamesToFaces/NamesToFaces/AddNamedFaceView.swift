@@ -56,5 +56,6 @@ struct AddNamedFaceView: View {
     
     func addNamedFace() {
         namedFaces.collection.append(NamedFace(id: UUID(), face: inputImage, name: inputName))
+        namedFaces.collection.sort()
     }
 }

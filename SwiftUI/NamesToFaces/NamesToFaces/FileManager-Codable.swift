@@ -13,7 +13,7 @@ extension FileManager {
         case decodingError(description: String)
     }
     
-    static func encode<T: Codable>(_ value: T, to file: String) throws {
+    static func encode<T: Codable>(_ value: T, toFile file: String) throws {
         let encoder = JSONEncoder()
         guard let encoded = try? encoder.encode(value) else {
             throw CodableError.encodingError(description: "Unable to encode data")
@@ -28,7 +28,7 @@ extension FileManager {
         }
     }
     
-    static func decode<T: Codable>(from file: String) throws -> T  {
+    static func decode<T: Codable>(fromFile file: String) throws -> T  {
         let url = getDocumentsDirectory().appendingPathComponent(file)
         guard let data = try? Data(contentsOf: url) else {
             throw CodableError.decodingError(description: "Unable to find \(file)")
